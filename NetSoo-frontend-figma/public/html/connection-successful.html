@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login Success</title></head>
+<body>
+  <script>
+    // Extract query parameter ?platform=facebook
+    const params = new URLSearchParams(window.location.search);
+    const platform = params.get("platform");
+    const action = params.get("action");
+    const action_params = params.get("action_params");
+
+    const payload = { status: "success" };
+    if (platform) payload.platform = platform;
+    if (action) payload.action = action;
+    if (action_params) payload.action_params = action_params;
+
+    // Send message to opener with the platform
+    window.opener.postMessage(payload, '*');
+
+    window.close();
+  </script>
+
+  <p>Login successful. You can close this window.</p>
+</body>
+</html>
